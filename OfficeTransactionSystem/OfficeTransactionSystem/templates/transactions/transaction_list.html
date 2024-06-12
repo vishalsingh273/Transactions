@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Office Transactions</title>
+</head>
+<body>
+    <h1>Office Transactions</h1>
+    <a href="{% url 'add_transaction' %}">+ Add Transaction</a>
+    <table border="1">
+        <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Credit</th>
+            <th>Debit</th>
+            <th>Running Balance</th>
+        </tr>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{ transaction.date }}</td>
+            <td>{{ transaction.description }}</td>
+            <td>{% if transaction.transaction_type == 'CREDIT' %}{{ transaction.amount }}{% endif %}</td>
+            <td>{% if transaction.transaction_type == 'DEBIT' %}{{ transaction.amount }}{% endif %}</td>
+            <td>{{ transaction.running_balance }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
